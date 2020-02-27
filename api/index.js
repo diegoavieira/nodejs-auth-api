@@ -1,4 +1,4 @@
-import app from './config/app';
+import app from './app';
 import { sequelize } from './models';
 
 sequelize.sync().then(() => {

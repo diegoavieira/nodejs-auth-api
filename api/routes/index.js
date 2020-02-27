@@ -1,5 +1,3 @@
-module.exports = app => {
-  app.get('/', (req, res) => {
-    res.json({ status: 'Node Auth API' });
-  });
-};
+import tasksRoutes from './tasks';
+
+module.exports = tasksRoutes;
