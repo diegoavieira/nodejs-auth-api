@@ -1,3 +1,3 @@
 import commonsMiddlewares from './commons';
 
-module.exports = commonsMiddlewares;
+export default commonsMiddlewares;

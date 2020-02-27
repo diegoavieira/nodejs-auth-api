@@ -1,3 +1,4 @@
 import tasksRoutes from './tasks';
+import usersRoutes from './users';
 
-module.exports = tasksRoutes;
+export { tasksRoutes, usersRoutes };
