@@ -1,3 +1,3 @@
 import wrapAsync from './wrap-async';
 
-module.exports = wrapAsync;
+export default wrapAsync;
