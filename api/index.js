@@ -1,12 +1,18 @@
+import express from 'express';
 import http from 'http';
-import app from './app';
-import { sequelize } from './configs';
+import middlewares from './configs/middlewares';
+import routes from './routes';
+import { sequelize } from './configs/database';
 
-const server = http.createServer(app);
-const port = app.get('port');
+const app = express();
+
+middlewares(app);
+routes(app);
 
 sequelize.sync().then(() => {
-  server.listen(port, () => {
+  const port = app.get('port');
+
+  http.createServer(app).listen(port, () => {
     console.log(`Server running at port ${port}`);
   });
 });
