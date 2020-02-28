@@ -1,11 +1,9 @@
 import { wrapAsync } from '../utils';
 import { getUsers, createUser } from '../controllers';
 
-const users = app => {
+export default app => {
   app
     .route('/users')
     .get(wrapAsync(getUsers))
     .post(wrapAsync(createUser));
 };
-
-export { users };

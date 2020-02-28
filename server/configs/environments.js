@@ -1,11 +1,11 @@
 const development = {
   db: {
-    database: 'db',
+    database: 'dev',
     username: '',
     password: '',
     params: {
       dialect: 'sqlite',
-      storage: 'db.sqlite',
+      storage: 'dev.sqlite',
       define: {
         underscored: true
       }
