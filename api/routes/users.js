@@ -1,14 +1,11 @@
-import { models } from '../models';
 import { wrapAsync } from '../utils';
+import { getUsers, createUser } from '../controllers';
 
-const { Users } = models;
-
-export default app => {
-  app.route('/users').get(
-    wrapAsync(async (req, res) => {
-      await Users.findAll({}).then(users => {
-        res.json({ users });
-      });
-    })
-  );
+const users = app => {
+  app
+    .route('/users')
+    .get(wrapAsync(getUsers))
+    .post(wrapAsync(createUser));
 };
+
+export { users };

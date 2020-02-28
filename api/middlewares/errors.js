@@ -1,4 +1,4 @@
-export default app => {
+const errors = app => {
   app.use('*', (req, res) => {
     res
       .status(404)
@@ -10,3 +10,5 @@ export default app => {
     res.status(500).json({ message: 'Internal server error.' });
   });
 };
+
+export { errors };

@@ -1,6 +1,6 @@
 import bodyParser from 'body-parser';
 
-export default app => {
+const commons = app => {
   app.disable('x-powered-by');
 
   app.set('port', process.env.PORT || 8000);
@@ -9,3 +9,5 @@ export default app => {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
 };
+
+export { commons };

@@ -3,12 +3,14 @@ import { wrapAsync } from '../utils';
 
 const { Tasks } = models;
 
-export default app => {
+const tasks = app => {
   app.route('/tasks').get(
     wrapAsync(async (req, res) => {
-      await Tasks.findAll({}).then(tasks => {
-        res.json({ tasks });
+      await Tasks.findAll({}).then(result => {
+        res.json({ result });
       });
     })
   );
 };
+
+export { tasks };

@@ -1,4 +1,2 @@
-import commonsMiddlewares from './commons';
-import errorsMiddlewares from './errors';
-
-export { commonsMiddlewares, errorsMiddlewares };
+export * from './commons';
+export * from './errors';

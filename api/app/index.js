@@ -1,17 +1,17 @@
 import express from 'express';
-import { tasksRoutes, usersRoutes } from '../routes';
-import { commonsMiddlewares, errorsMiddlewares } from '../middlewares';
+import { tasks, users } from '../routes';
+import { commons, errors } from '../middlewares';
 
 const app = express();
 
 // Middlewares
-commonsMiddlewares(app);
+commons(app);
 
 // Routes
-tasksRoutes(app);
-usersRoutes(app);
+tasks(app);
+users(app);
 
 // Errors
-errorsMiddlewares(app);
+errors(app);
 
 export default app;
