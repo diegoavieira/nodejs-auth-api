@@ -1,5 +1,5 @@
 export default (sequelize, DataType) => {
-  const Users = sequelize.define('Users', {
+  return sequelize.define('Users', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -28,10 +28,4 @@ export default (sequelize, DataType) => {
       }
     }
   });
-
-  Users.associate = models => {
-    models.Users.hasMany(models.Tasks);
-  };
-
-  return Users;
 };

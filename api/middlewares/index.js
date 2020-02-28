@@ -1,2 +1,2 @@
 export * from './commons';
-export * from './errors';
+export * from './routes';

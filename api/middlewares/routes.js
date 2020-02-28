@@ -1,4 +1,9 @@
-const errors = app => {
+import { users, tasks } from '../routes';
+
+const routes = app => {
+  users(app);
+  tasks(app);
+
   app.use('*', (req, res) => {
     res
       .status(404)
@@ -11,4 +16,4 @@ const errors = app => {
   });
 };
 
-export { errors };
+export { routes };

@@ -1,5 +1,5 @@
 export default (sequelize, DataType) => {
-  const Tasks = sequelize.define('Tasks', {
+  return sequelize.define('Tasks', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,
@@ -18,10 +18,4 @@ export default (sequelize, DataType) => {
       defaultValue: false
     }
   });
-
-  Tasks.associate = models => {
-    models.Tasks.belongsTo(models.Users);
-  };
-
-  return Tasks;
 };
