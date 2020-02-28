@@ -1,3 +1,4 @@
 import commonsMiddlewares from './commons';
+import errorsMiddlewares from './errors';
 
-export default commonsMiddlewares;
+export { commonsMiddlewares, errorsMiddlewares };

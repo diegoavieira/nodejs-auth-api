@@ -1,6 +1,6 @@
 import express from 'express';
 import { tasksRoutes, usersRoutes } from '../routes';
-import commonsMiddlewares from '../middlewares';
+import { commonsMiddlewares, errorsMiddlewares } from '../middlewares';
 
 const app = express();
 
@@ -10,5 +10,8 @@ commonsMiddlewares(app);
 // Routes
 tasksRoutes(app);
 usersRoutes(app);
+
+// Errors
+errorsMiddlewares(app);
 
 export default app;

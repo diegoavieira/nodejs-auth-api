@@ -1,5 +1,5 @@
 import { models } from '../models';
-import wrapAsync from '../utils';
+import { wrapAsync } from '../utils';
 
 const { Users } = models;
 
