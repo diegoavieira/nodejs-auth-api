@@ -1,3 +1,1 @@
-import wrapAsync from './wrap-async';
-
-export { wrapAsync };
+export * from './wrap-async';

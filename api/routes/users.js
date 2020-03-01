@@ -1,9 +1,11 @@
 import { wrapAsync } from '../utils';
 import { getUsers, createUser } from '../controllers';
 
-export default app => {
-  app
-    .route('/users')
-    .get(wrapAsync(getUsers))
-    .post(wrapAsync(createUser));
-};
+const router = require('express').Router();
+
+router
+  .route('/')
+  .get(wrapAsync(getUsers))
+  .post(wrapAsync(createUser));
+
+export default router;

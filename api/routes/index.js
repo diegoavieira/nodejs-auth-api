@@ -1,20 +1,9 @@
 import users from './users';
 import tasks from './tasks';
 
-export default app => {
-  users(app);
-  tasks(app);
+const router = require('express').Router();
 
-  // import routes here
+router.use('/users', users);
+router.use('/tasks', tasks);
 
-  app.use('*', (req, res) => {
-    res
-      .status(404)
-      .json({ message: `Route ${req.originalUrl} does not exists.` });
-  });
-
-  app.use((err, req, res) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'Internal server error.' });
-  });
-};
+export default router;

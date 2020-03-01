@@ -1,6 +1,8 @@
 import { wrapAsync } from '../utils';
 import { getTasks } from '../controllers';
 
-export default app => {
-  app.route('/tasks').get(wrapAsync(getTasks));
-};
+const router = require('express').Router();
+
+router.route('/').get(wrapAsync(getTasks));
+
+export default router;
