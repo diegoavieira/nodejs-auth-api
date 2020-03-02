@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Node Auth API",
   "scripts": {
-    "start": "nodemon --exec babel-node ./api/index.js"
+    "start": "babel-node -r dotenv/config ./server/index.js",
+    "dev": "nodemon --exec babel-node -r dotenv/config ./server/index.js"
   },
   "keywords": [
     "nodejs",
@@ -30,6 +31,7 @@
     "@babel/register": "^7.8.6",
     "@babel/runtime": "^7.8.4",
     "babel-loader": "^8.0.6",
+    "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",

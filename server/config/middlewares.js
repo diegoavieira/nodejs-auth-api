@@ -1,10 +1,11 @@
 import bodyParser from 'body-parser';
 import routes from '../routes';
+import env from './env';
 
 export default app => {
   app.disable('x-powered-by');
 
-  app.set('port', process.env.PORT || 8000);
+  app.set('port', env.port);
   app.set('json spaces', 2);
 
   app.use(bodyParser.json());
