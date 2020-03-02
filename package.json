@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Node Auth API",
   "scripts": {
-    "start": "./node_modules/.bin/babel-node -r dotenv/config ./server/index.js",
+    "start": "node -r dotenv/config ./dist/index.js",
+    "build": "babel server -s -d dist",
     "dev": "nodemon --exec babel-node -r dotenv/config ./server/index.js"
   },
   "keywords": [
