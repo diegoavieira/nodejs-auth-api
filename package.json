@@ -1,7 +1,7 @@
 {
-  "name": "node-auth-api",
+  "name": "nodejs-auth-api",
   "version": "0.0.0",
-  "description": "Node Auth API",
+  "description": "NodeJs Auth API",
   "scripts": {
     "start": "nodemon --exec babel-node -r dotenv/config ./api/index.js"
   },

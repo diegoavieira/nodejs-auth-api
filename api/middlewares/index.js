@@ -19,7 +19,7 @@ export default app => {
     app.use(morgan('dev'));
   }
 
-  app.use('/api', routes);
+  app.use('/v1', routes);
 
   app.use('*', (req, res) => {
     res
