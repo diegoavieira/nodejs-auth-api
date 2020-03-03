@@ -1,6 +1,10 @@
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import compression from 'compression';
 import routes from '../routes';
 import environments from './environments';
+
+const nodeEnv = process.env.NODE_ENV || 'development';
 
 export default app => {
   app.disable('x-powered-by');
@@ -10,6 +14,14 @@ export default app => {
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  if (nodeEnv === 'development') {
+    app.use(morgan('dev'));
+  }
+
+  if (nodeEnv === 'production') {
+    app.use(compression());
+  }
 
   app.use('/api', routes);
 

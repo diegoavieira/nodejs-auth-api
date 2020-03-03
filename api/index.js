@@ -7,10 +7,26 @@ const app = express();
 
 middlewares(app);
 
-sequelize.sync().then(() => {
-  const port = app.get('port');
+sequelize
+  .authenticate()
+  .then(() => {
+    return sequelize
+      .sync()
+      .then(() => {
+        console.log('Models synchronized');
+        console.log('Database connected');
+      })
+      .catch(error => {
+        console.log('Models not synchronized: ', error.message);
+      });
+  })
+  .then(() => {
+    const port = app.get('port');
 
-  http.createServer(app).listen(port, () => {
-    console.log(`Server running at port ${port}`);
+    http.createServer(app).listen(port, () => {
+      console.log(`Server running at port ${port}`);
+    });
+  })
+  .catch(error => {
+    console.log('Unable to connect to the database: ', error.message);
   });
-});
