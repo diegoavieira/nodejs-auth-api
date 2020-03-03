@@ -1,7 +1,7 @@
 import express from 'express';
 import http from 'http';
-import middlewares from './configs/middlewares';
-import { sequelize } from './configs/database';
+import middlewares from './middlewares';
+import { sequelize } from './config/database';
 
 const app = express();
 
