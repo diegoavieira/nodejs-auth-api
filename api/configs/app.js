@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import compression from 'compression';
@@ -14,6 +15,7 @@ app.set('port', env.port);
 app.set('json spaces', 2);
 
 app.use(isProd ? compression() : morgan('dev', { stream: logger.stream }));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

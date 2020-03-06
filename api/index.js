@@ -1,4 +1,3 @@
-import http from 'http';
 import app from './configs/app';
 import { sequelize } from './configs/database';
 import logger from './utils/logger';
@@ -17,7 +16,7 @@ sequelize
       .catch(error => logger.error(error.message));
   })
   .then(() => {
-    http.createServer(app).listen(port, () => {
+    app.listen(port, () => {
       logger.info(`Server running at port ${port}`);
     });
   })
