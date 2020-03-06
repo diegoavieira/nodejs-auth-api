@@ -1,5 +1,5 @@
 export default (sequelize, DataType) => {
-  return sequelize.define('Tasks', {
+  return sequelize.define('Task', {
     id: {
       type: DataType.INTEGER,
       primaryKey: true,

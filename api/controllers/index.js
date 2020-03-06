@@ -1,2 +1,2 @@
-export * from './users';
-export * from './tasks';
+export * from './user.controller';
+export * from './task.controller';
