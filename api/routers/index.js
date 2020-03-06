@@ -1,9 +1,7 @@
-import UserRouter from './user.router';
-import TaskRouter from './task.router';
+import userRouter from './user.router';
 
-const Routers = require('express').Router();
+const routers = require('express').Router();
 
-Routers.use('/user', UserRouter);
-Routers.use('/task', TaskRouter);
+routers.use('/user', userRouter);
 
-export default Routers;
+export default routers;

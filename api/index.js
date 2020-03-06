@@ -1,23 +1,17 @@
-import app from './configs/app';
 import { sequelize } from './configs/database';
+import app from './configs/app';
 import logger from './utils/logger';
 
 const port = app.get('port');
 
 sequelize
   .authenticate()
-  .then(() => {
-    return sequelize
-      .sync()
-      .then(() => {
-        logger.info('Models synchronized');
-        logger.info('Database connected');
-      })
-      .catch(error => logger.error(error.message));
-  })
-  .then(() => {
-    app.listen(port, () => {
-      logger.info(`Server running at port ${port}`);
-    });
+  .then(async () => {
+    try {
+      await sequelize.sync();
+      app.listen(port);
+    } catch (error) {
+      return logger.error(error.message);
+    }
   })
   .catch(error => logger.error(error.message));

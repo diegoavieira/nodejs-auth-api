@@ -1,23 +1,23 @@
-import { UserModel } from '../models';
+import { userModel } from '../models';
 
-const UserController = {};
+const userController = {};
 
-UserController.findAll = async (req, res) => {
+userController.findAll = async (req, res) => {
   try {
-    const result = await UserModel.findAll({});
+    const result = await userModel.findAll({});
     res.json(result);
   } catch (error) {
     res.status(412).json({ message: error.message });
   }
 };
 
-UserController.create = async (req, res) => {
+userController.create = async (req, res) => {
   try {
-    const result = await UserModel.create(req.body);
+    const result = await userModel.create(req.body);
     res.status(201).json({ result });
   } catch (error) {
     res.status(415).json({ message: error.message });
   }
 };
 
-export { UserController };
+export { userController };

@@ -1,10 +1,11 @@
 import wrapAsync from '../utils/wrap-async';
 import { UserController } from '../controllers';
 
-const UserRouter = require('express').Router();
+const userRouter = require('express').Router();
 
-UserRouter.route('/')
+userRouter
+  .route('/')
   .get(wrapAsync(UserController.findAll))
   .post(wrapAsync(UserController.create));
 
-export default UserRouter;
+export default userRouter;

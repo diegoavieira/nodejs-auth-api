@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import compression from 'compression';
-import Routers from '../routers';
+import routers from '../routers';
 import { env, isProd } from './environment';
 import logger from '../utils/logger';
 
@@ -19,7 +19,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', Routers);
+app.use('/', routers);
 
 app.use('*', (req, res) => {
   res
