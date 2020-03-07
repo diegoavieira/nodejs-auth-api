@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import routers from '../api/routers';
+import routes from '../api/routes';
 import logger from '../util/logger';
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', routers);
+app.use('/', routes);
 
 app.use('*', (req, res) => {
   res
