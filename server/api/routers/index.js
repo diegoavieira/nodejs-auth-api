@@ -2,6 +2,6 @@ import userRouter from './user.router';
 
 const routers = require('express').Router();
 
-routers.use('/user', userRouter);
+routers.use('/users', userRouter);
 
 export default routers;

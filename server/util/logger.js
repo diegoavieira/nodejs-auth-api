@@ -15,14 +15,14 @@ const logger = createLogger({
       filename: 'logs/error.log',
       maxsize: 5242880,
       format: format.printf(info => {
-        return `${dateNow} | ${info.message}`;
+        return `[${dateNow}] ${info.message}`;
       })
     })
   ]
 });
 
 logger.stream = {
-  write: info => logger.info(info)
+  write: info => logger.debug(info)
 };
 
 export default logger;

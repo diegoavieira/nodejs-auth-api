@@ -1,6 +1,6 @@
-import { Sequelize, DataTypes } from 'sequelize';
+import { Sequelize } from 'sequelize';
 import { env, isDev } from './environment';
-import logger from '../utils/logger';
+import logger from '../util/logger';
 
 const sequelize = new Sequelize(env.database_url, {
   dialect: 'postgres',
@@ -11,4 +11,9 @@ const sequelize = new Sequelize(env.database_url, {
   }
 });
 
-export { Sequelize, DataTypes, sequelize };
+sequelize
+  .authenticate()
+  .then(() => logger.info('Database connected'))
+  .catch(error => logger.error(error.message));
+
+export default sequelize;

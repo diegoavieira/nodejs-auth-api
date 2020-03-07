@@ -3,9 +3,9 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import compression from 'compression';
-import routers from '../routers';
+import routers from '../api/routers';
 import { env, isProd } from './environment';
-import logger from '../utils/logger';
+import logger from '../util/logger';
 
 const app = express();
 
