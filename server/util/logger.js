@@ -1,11 +1,11 @@
 import { format, createLogger, transports } from 'winston';
-
-const dateNow = new Date(Date.now()).toUTCString();
+import { isDev } from '../config/environment';
 
 const logger = createLogger({
-  format: format.combine(format.colorize()),
+  format: format.combine(format.colorize(), format.timestamp()),
   transports: [
     new transports.Console({
+      level: isDev ? 'debug' : 'info',
       format: format.printf(info => {
         return `[${info.level}] ${info.message}`;
       })
@@ -15,7 +15,7 @@ const logger = createLogger({
       filename: 'logs/error.log',
       maxsize: 5242880,
       format: format.printf(info => {
-        return `[${dateNow}] ${info.message}`;
+        return `${info.timestamp}: ${info.message}`;
       })
     })
   ]
