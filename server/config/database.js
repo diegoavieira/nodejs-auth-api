@@ -7,7 +7,8 @@ const database = new Sequelize(env.database_url, {
   logging: isDev ? logger.stream.write : false,
   define: {
     freezeTableName: true,
-    underscored: true
+    underscored: true,
+    timestamps: false
   }
 });
 
