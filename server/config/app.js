@@ -19,9 +19,7 @@ app.use(bodyParser.json());
 app.use('/', routes);
 
 app.use('*', (req, res) => {
-  res
-    .status(404)
-    .json({ message: `Route ${req.originalUrl} does not exists.` });
+  res.status(404).json({ error: `Route ${req.originalUrl} does not exists` });
 });
 
 app.use((err, req, res) => {

@@ -5,16 +5,16 @@ const userController = {};
 userController.create = async (req, res) => {
   try {
     const data = await userModel.create(req.body);
-    res.status(201).json({ data });
+    return res.status(201).json({ data });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 userController.getAll = async (req, res) => {
   try {
     const data = await userModel.findAll({});
-    res.status(200).json({ data });
+    return res.status(200).json({ data });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -26,12 +26,12 @@ userController.getById = async (req, res) => {
     const data = await userModel.findOne({ where: { id } });
 
     if (data) {
-      res.status(200).json({ data });
+      return res.status(200).json({ data });
     }
 
-    res.status(404).json({ data: null });
+    return res.status(404).json({ data: null });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -44,12 +44,12 @@ userController.update = async (req, res) => {
 
     if (updated) {
       const data = await userModel.findOne({ where: { id: updated } });
-      res.status(200).json({ data });
+      return res.status(200).json({ data });
     }
 
-    res.status(404).json({ data: null });
+    return res.status(404).json({ data: null });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -61,12 +61,12 @@ userController.delete = async (req, res) => {
     });
 
     if (deleted) {
-      res.status(204).json({ data: null });
+      return res.status(204).json({ data: null });
     }
 
-    res.status(404).json({ data: null });
+    return res.status(404).json({ data: null });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
