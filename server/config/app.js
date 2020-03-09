@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import routes from '../api/routes';
@@ -14,7 +13,6 @@ app.set('json spaces', 2);
 
 app.use(morgan('dev', { stream: logger.stream }));
 app.use(cors());
-app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
