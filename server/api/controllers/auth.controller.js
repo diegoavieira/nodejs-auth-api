@@ -67,7 +67,7 @@ authController.refresh = async (req, res) => {
         expiresIn: '10s'
       });
 
-      return res.status(200).json({ access_token });
+      return res.status(200).json({ access_token, refresh_token });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
