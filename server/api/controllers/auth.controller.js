@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
+import randToken from 'rand-token';
 import { userModel } from '../models';
 import { env } from '../../config/environment';
 
 const authController = {};
-const tokenList = {};
+const refreshTokens = {};
 
 authController.login = async (req, res) => {
   try {
@@ -20,27 +21,43 @@ authController.login = async (req, res) => {
     }
 
     if (!user || !checkPass) {
-      return res
-        .status(401)
-        .json({ error: 'Invalid password or username not exist' });
+      return res.status(401).json({ error: 'Username or password incorrect' });
     }
 
-    const token = jwt.sign({ id: user.id }, env.tokenSecreat, {
+    const payload = {
+      id: user.id,
+      username: user.username,
+      role: 'admin'
+    };
+
+    const access_token = jwt.sign(payload, env.tokenSecreat, {
       expiresIn: env.tokenLive
     });
 
-    const refreshToken = jwt.sign({ id: user.id }, env.refreshTokenSecreat, {
-      expiresIn: env.refreshTokenLive
-    });
+    const refresh_token = randToken.uid(256);
 
-    const response = {
-      token: token,
-      refreshToken: refreshToken
-    };
+    refreshTokens[refresh_token] = payload;
 
-    tokenList[refreshToken] = response;
+    return res.status(200).json({ access_token, refresh_token });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
-    return res.status(200).json(response);
+authController.refresh = async (req, res) => {
+  try {
+    const { refresh_token } = req.body;
+
+    if (refresh_token in refreshTokens) {
+      const payload = refreshTokens[refresh_token];
+      const access_token = jwt.sign(payload, env.tokenSecreat, {
+        expiresIn: env.tokenLive
+      });
+
+      return res.status(200).json({ access_token });
+    }
+
+    return res.status(403).json({ error: 'Refresh token expired' });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
