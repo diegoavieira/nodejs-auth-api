@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import randToken from 'rand-token';
 import { userModel } from '../models';
 import { env } from '../../config/environment';
 
@@ -26,15 +25,16 @@ authController.login = async (req, res) => {
 
     const payload = {
       id: user.id,
-      username: user.username,
-      role: 'admin'
+      username: user.username
     };
 
     const access_token = jwt.sign(payload, env.tokenSecreat, {
-      expiresIn: env.tokenLive
+      expiresIn: '10s'
     });
 
-    const refresh_token = randToken.uid(256);
+    const refresh_token = jwt.sign({ type: 'refresh' }, env.tokenSecreat, {
+      expiresIn: '20s'
+    });
 
     refreshTokens[refresh_token] = payload;
 
@@ -48,16 +48,27 @@ authController.refresh = async (req, res) => {
   try {
     const { refresh_token } = req.body;
 
+    if (!refresh_token) {
+      return res
+        .status(401)
+        .json({ error: 'There is no refresh token to check' });
+    }
+
+    const verifyRefreshToken = jwt.verify(refresh_token, env.tokenSecreat);
+
+    if (!verifyRefreshToken) {
+      return res.status(403).json({ error: 'Refresh token expired' });
+    }
+
     if (refresh_token in refreshTokens) {
       const payload = refreshTokens[refresh_token];
+
       const access_token = jwt.sign(payload, env.tokenSecreat, {
-        expiresIn: env.tokenLive
+        expiresIn: '10s'
       });
 
       return res.status(200).json({ access_token });
     }
-
-    return res.status(403).json({ error: 'Refresh token expired' });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
