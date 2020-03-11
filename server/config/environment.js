@@ -6,7 +6,9 @@ const env = {
   port: process.env.PORT,
   database_url: process.env.DATABASE_URL,
   tokenSecreat: process.env.TOKEN_SECRET,
-  tokenLive: process.env.TOKEN_LIFE
+  refreshTokenSecreat: process.env.REFRESH_TOKEN_SECRET,
+  tokenLive: process.env.TOKEN_LIFE,
+  refreshTokenLive: process.env.REFRESH_TOKEN_LIFE
 };
 
 const isDev = nodeEnv === 'development';
