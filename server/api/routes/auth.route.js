@@ -1,24 +1,30 @@
 import { Router } from 'express';
-import wrapAsync from '../../util/wrap-async';
+import wrapAsync from '../../middleware/wrap-async';
 import { authController } from '../controllers';
 import { check } from 'express-validator';
-import validator from '../../util/validator';
+import validate from '../../middleware/validate';
 
 const authRoute = Router();
 
-authRoute
-  .route('/login')
-  .post(
-    [check('username').exists(), check('password').exists()],
-    validator,
-    wrapAsync(authController.login)
-  );
-authRoute
-  .route('/refresh')
-  .post(
-    [check('refresh_token').exists()],
-    validator,
-    wrapAsync(authController.refresh)
-  );
+authRoute.route('/login').post(
+  validate([
+    check('username')
+      .not()
+      .isEmpty(),
+    check('password')
+      .not()
+      .isEmpty()
+  ]),
+  wrapAsync(authController.login)
+);
+
+authRoute.route('/refresh').post(
+  validate([
+    check('refresh_token')
+      .not()
+      .isEmpty()
+  ]),
+  wrapAsync(authController.refresh)
+);
 
 export default authRoute;

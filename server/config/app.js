@@ -3,7 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import routes from '../api/routes';
-import logger from '../util/logger';
+import logger from './logger';
 
 const app = express();
 

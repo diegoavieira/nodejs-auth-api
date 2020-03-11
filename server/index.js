@@ -1,6 +1,6 @@
 import database from './config/database';
 import app from './config/app';
-import logger from './util/logger';
+import logger from './config/logger';
 import { env } from './config/environment';
 
 database
