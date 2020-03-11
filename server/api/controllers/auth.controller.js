@@ -3,7 +3,6 @@ import { userModel } from '../models';
 import { env } from '../../config/environment';
 
 const authController = {};
-const refreshTokens = {};
 
 authController.login = async (req, res) => {
   try {
@@ -15,7 +14,7 @@ authController.login = async (req, res) => {
         .json({ error: 'Username and password are required' });
     }
 
-    const user = await userModel.findOne({ where: { username } });
+    const user = await userModel.findOne({ where: { username }, raw: true });
 
     let checkPass = null;
 
@@ -39,15 +38,9 @@ authController.login = async (req, res) => {
       expiresIn: env.tokenLive
     });
 
-    const refresh_token = jwt.sign(
-      { type: 'refresh' },
-      env.refreshTokenSecreat,
-      {
-        expiresIn: env.refreshTokenLive
-      }
-    );
-
-    refreshTokens[refresh_token] = payload;
+    const refresh_token = jwt.sign(payload, env.refreshTokenSecreat, {
+      expiresIn: env.refreshTokenLive
+    });
 
     return res.status(200).json({ access_token, refresh_token });
   } catch (error) {
@@ -63,22 +56,22 @@ authController.refresh = async (req, res) => {
       return res.status(400).json({ error: 'Refresh token is required' });
     }
 
-    const verifyRefreshToken = jwt.verify(
-      refresh_token,
-      env.refreshTokenSecreat
-    );
+    const user = jwt.verify(refresh_token, env.refreshTokenSecreat);
 
-    if (verifyRefreshToken) {
-      if (refresh_token in refreshTokens) {
-        const payload = refreshTokens[refresh_token];
+    const payload = {
+      id: user.id,
+      username: user.username
+    };
 
-        const access_token = jwt.sign(payload, env.tokenSecreat, {
-          expiresIn: env.tokenLive
-        });
+    const new_access_token = jwt.sign(payload, env.tokenSecreat, {
+      expiresIn: env.tokenLive
+    });
 
-        return res.status(200).json({ access_token, refresh_token });
-      }
-    }
+    const new_refresh_token = jwt.sign(payload, env.refreshTokenSecreat, {
+      expiresIn: env.refreshTokenLive
+    });
+
+    return res.status(200).json({ new_access_token, new_refresh_token });
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
       return res.status(403).json({ error: error.message });
