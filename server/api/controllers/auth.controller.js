@@ -8,22 +8,11 @@ authController.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    if (!username || !password) {
-      return res
-        .status(400)
-        .json({ error: 'Username and password are required' });
-    }
+    const user = await userModel.findOne({ where: { username } });
 
-    const user = await userModel.findOne({ where: { username }, raw: true });
-
-    let checkPass = null;
-
-    if (user) {
-      checkPass = await userModel.prototype.checkPassword(
-        user.password,
-        password
-      );
-    }
+    const checkPass = user
+      ? await userModel.prototype.checkPassword(user.password, password)
+      : null;
 
     if (!user || !checkPass) {
       return res.status(401).json({ error: 'Username or password incorrect' });
@@ -52,10 +41,6 @@ authController.refresh = async (req, res) => {
   try {
     const { refresh_token } = req.body;
 
-    if (!refresh_token) {
-      return res.status(400).json({ error: 'Refresh token is required' });
-    }
-
     const user = jwt.verify(refresh_token, env.refreshTokenSecreat);
 
     const payload = {
@@ -71,13 +56,16 @@ authController.refresh = async (req, res) => {
       expiresIn: env.refreshTokenLive
     });
 
-    return res.status(200).json({ new_access_token, new_refresh_token });
+    return res.status(200).json({
+      access_token: new_access_token,
+      refresh_token: new_refresh_token
+    });
   } catch (error) {
     if (error.name === 'TokenExpiredError') {
-      return res.status(403).json({ error: error.message });
+      return res.status(401).json({ error: error.message });
     }
 
-    return res.status(400).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 };
 
