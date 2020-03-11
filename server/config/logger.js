@@ -7,7 +7,11 @@ const logger = createLogger({
     new transports.Console({
       level: isDev ? 'debug' : 'info',
       format: format.printf(info => {
-        return `[${info.level}] ${info.message}`;
+        if (typeof info.message === 'string') {
+          return `[${info.level}] ${info.message}`;
+        } else {
+          return `[${info.level}] ${JSON.stringify(info.message)}`;
+        }
       })
     }),
     new transports.File({
@@ -15,7 +19,11 @@ const logger = createLogger({
       filename: 'logs/error.log',
       maxsize: 5242880,
       format: format.printf(info => {
-        return `${info.timestamp}: ${info.message}`;
+        if (typeof info.message === 'string') {
+          return `${info.timestamp}: ${info.message}`;
+        } else {
+          return `${info.timestamp}: ${JSON.stringify(info.message)}`;
+        }
       })
     })
   ]
