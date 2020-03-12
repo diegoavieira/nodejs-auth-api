@@ -15,7 +15,7 @@ authController.login = async (req, res) => {
       : null;
 
     if (!user || !checkPass) {
-      return res.status(401).json({ error: 'Username or password incorrect' });
+      return res.status(403).json({ error: 'Username or password incorrect' });
     }
 
     const payload = {
@@ -23,11 +23,11 @@ authController.login = async (req, res) => {
       username: user.username
     };
 
-    const access_token = jwt.sign(payload, env.tokenSecreat, {
+    const access_token = jwt.sign(payload, env.tokenSecret, {
       expiresIn: env.tokenLive
     });
 
-    const refresh_token = jwt.sign(payload, env.refreshTokenSecreat, {
+    const refresh_token = jwt.sign(payload, env.refreshTokenSecret, {
       expiresIn: env.refreshTokenLive
     });
 
@@ -37,22 +37,22 @@ authController.login = async (req, res) => {
   }
 };
 
-authController.refresh = async (req, res) => {
+authController.refresh = (req, res) => {
   try {
     const { refresh_token } = req.body;
 
-    const user = jwt.verify(refresh_token, env.refreshTokenSecreat);
+    const user = jwt.verify(refresh_token, env.refreshTokenSecret);
 
     const payload = {
       id: user.id,
       username: user.username
     };
 
-    const new_access_token = jwt.sign(payload, env.tokenSecreat, {
+    const new_access_token = jwt.sign(payload, env.tokenSecret, {
       expiresIn: env.tokenLive
     });
 
-    const new_refresh_token = jwt.sign(payload, env.refreshTokenSecreat, {
+    const new_refresh_token = jwt.sign(payload, env.refreshTokenSecret, {
       expiresIn: env.refreshTokenLive
     });
 
