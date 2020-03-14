@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { env } from '../config/environment';
 
-const verifyAuth = async (req, res, next) => {
+const verifyAuth = (req, res, next) => {
   try {
     const token = req.headers['authorization'];
 
@@ -9,10 +9,7 @@ const verifyAuth = async (req, res, next) => {
       return res.status(422).send({ error: 'No authorization header' });
     }
 
-    const user = await jwt.verify(
-      token.replace('Bearer ', ''),
-      env.tokenSecret
-    );
+    const user = jwt.verify(token.replace('Bearer ', ''), env.tokenSecret);
 
     if (user) {
       return next();
