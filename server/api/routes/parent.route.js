@@ -17,4 +17,4 @@ parentRoute
   .put(wrapAsync(parentController.update))
   .delete(wrapAsync(parentController.delete));
 
-export default parentRoute;
+export { parentRoute };

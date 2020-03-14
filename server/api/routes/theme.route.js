@@ -17,4 +17,4 @@ themeRoute
   .put(wrapAsync(themeController.update))
   .delete(wrapAsync(themeController.delete));
 
-export default themeRoute;
+export { themeRoute };

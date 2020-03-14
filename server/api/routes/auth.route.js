@@ -27,4 +27,4 @@ authRoute.route('/refresh').post(
   wrapAsync(authController.refresh)
 );
 
-export default authRoute;
+export { authRoute };

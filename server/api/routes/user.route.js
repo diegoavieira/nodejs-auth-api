@@ -18,4 +18,4 @@ userRoute
   .put(wrapAsync(userController.update))
   .delete(wrapAsync(userController.delete));
 
-export default userRoute;
+export { userRoute };
