@@ -24,7 +24,7 @@ authRoute.route('/refresh').post(
       .not()
       .isEmpty()
   ]),
-  wrapAsync(authController.refresh)
+  authController.refresh
 );
 
 export { authRoute };
