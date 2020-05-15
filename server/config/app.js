@@ -8,15 +8,13 @@ import api from '../api';
 
 const app = express();
 
-app.disable('x-powered-by');
-
 app.set('json spaces', 2);
-
 app.use(morgan('dev', { stream: logger.stream }));
+
 app.use(helmet());
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 app.use('/', api);
 

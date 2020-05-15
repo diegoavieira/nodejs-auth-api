@@ -1,26 +1,17 @@
-import jwt from 'jsonwebtoken';
+import jwt from 'express-jwt';
+import jwksRsa from 'jwks-rsa';
 import { env } from '../config/environment';
 
-const verifyAuth = (req, res, next) => {
-  try {
-    const token = req.headers['authorization'];
-
-    if (!token) {
-      return res.status(422).send({ error: 'No authorization header' });
-    }
-
-    const user = jwt.verify(token.replace('Bearer ', ''), env.tokenSecret);
-
-    if (user) {
-      return next();
-    }
-  } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ error: error.message });
-    }
-
-    return res.status(500).json({ error: error.message });
-  }
-};
+const verifyAuth = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://${env.auth0_domain}/.well-known/jwks.json`
+  }),
+  audience: env.auth0_audience,
+  issuer: `https://${env.auth0_domain}/`,
+  algorithms: ['RS256']
+});
 
 export default verifyAuth;
