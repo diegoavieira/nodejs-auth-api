@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
 import logger from './logger';
-import { openidConnect, setHeaderAuthorization } from './openid-connect';
+import openidConnect from './openid-connect';
 import api from '../api';
 
 const app = express();
@@ -21,7 +21,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(openidConnect);
-app.use(setHeaderAuthorization);
 
 app.use('/', api);
 
