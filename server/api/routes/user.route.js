@@ -2,6 +2,7 @@ import { Router } from 'express';
 import wrapAsync from '../../middleware/wrap-async';
 import { userController } from '../controllers';
 import verifyAuth from '../../middleware/verify-auth';
+import verifyPermission from '../../middleware/verify-permission';
 
 const userRoute = Router();
 
@@ -9,7 +10,7 @@ userRoute
   .route('/')
   .all(verifyAuth)
   .post(wrapAsync(userController.create))
-  .get(wrapAsync(userController.getAll));
+  .get(verifyPermission('read:users'), wrapAsync(userController.getAll));
 
 userRoute
   .route('/:id')
