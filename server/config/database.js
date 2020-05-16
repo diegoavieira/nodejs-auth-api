@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize';
 import { env, isDev } from './environment';
 import logger from './logger';
 
-const database = new Sequelize(env.database_url, {
+const database = new Sequelize(env.database_uri, {
   dialect: 'postgres',
   logging: isDev ? logger.stream.write : false,
   define: {
