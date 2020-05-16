@@ -21,4 +21,12 @@ const openidConnect = auth({
   }
 });
 
-export default openidConnect;
+const setHeaderAuthorization = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    req.headers.authorization = `Bearer ${req.appSession.openidTokens.access_token}`;
+  }
+
+  next();
+};
+
+export { openidConnect, setHeaderAuthorization };
