@@ -6,7 +6,7 @@ const openidConnect = [
     required: false,
     auth0Logout: true,
     appSession: {
-      secret: 'a long, randomly-generated string stored in env'
+      secret: env.session_secret
     },
     baseURL: env.base_url,
     clientID: env.auth0_client_id,
