@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import wrapAsync from '../../middleware/wrap-async';
+import wrapAsync from './middlewares/wrap-async';
 import { parentController } from '../controllers';
 
 const parentRoute = Router();
