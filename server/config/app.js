@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import path from 'path';
 import logger from './logger';
-import openidConnect from './openid-connect';
+import keycloak from './keycloak';
 import api from '../api';
 
 const app = express();
@@ -20,7 +20,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(openidConnect);
+app.use(keycloak.middleware());
 
 app.use('/', api);
 
