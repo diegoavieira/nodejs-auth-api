@@ -7,13 +7,13 @@ const userRoute = Router();
 
 userRoute
   .route('/')
-  .all(keycloak.protect('user'))
+  .all(keycloak.protect())
   .post(wrapAsync(userController.create))
   .get(wrapAsync(userController.getAll));
 
 userRoute
   .route('/:id')
-  .all(keycloak.protect('user'))
+  .all(keycloak.protect())
   .get(wrapAsync(userController.getById))
   .put(wrapAsync(userController.update))
   .delete(wrapAsync(userController.delete));
