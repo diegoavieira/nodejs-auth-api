@@ -7,8 +7,7 @@ const env = {
   database_uri: process.env.DATABASE_URI,
   auth_url: process.env.AUTH_URL,
   realm: process.env.REALM,
-  client_id: process.env.CLIENT_ID,
-  client_secret: process.env.CLIENT_SECRET
+  client_id: process.env.CLIENT_ID
 };
 
 const isDev = nodeEnv === 'development';

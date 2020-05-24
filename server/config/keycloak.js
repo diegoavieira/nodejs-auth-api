@@ -8,10 +8,7 @@ const config = {
   clientId: env.client_id,
   bearerOnly: true,
   serverUrl: env.auth_url,
-  realm: env.realm,
-  credentials: {
-    secret: env.client_secret
-  }
+  realm: env.realm
 };
 
 const keycloak = new Keycloak({ store: memoryStore }, config);

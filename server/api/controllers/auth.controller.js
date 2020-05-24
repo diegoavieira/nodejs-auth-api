@@ -8,14 +8,13 @@ authController.tokens = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const url = `${env.auth_url}/realms/adsystem-dev/protocol/openid-connect/token`;
+    const url = `${env.auth_url}/realms/${env.realm}/protocol/openid-connect/token`;
 
     const params = {
       client_id: env.client_id,
       username,
       password,
-      grant_type: 'password',
-      client_secret: env.client_secret
+      grant_type: 'password'
     };
 
     const { data } = await axios.post(url, qs.stringify(params), {
