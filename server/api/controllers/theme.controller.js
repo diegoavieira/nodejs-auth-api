@@ -35,6 +35,21 @@ themeController.getById = async (req, res) => {
   }
 };
 
+themeController.getByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const data = await themeModel.findOne({ where: { name } });
+
+    if (data) {
+      return res.status(200).json({ data });
+    }
+
+    return res.status(404).json({ data: null });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 themeController.update = async (req, res) => {
   try {
     const { id } = req.params;

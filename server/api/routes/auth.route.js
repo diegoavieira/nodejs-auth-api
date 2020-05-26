@@ -6,7 +6,7 @@ import validate from './middlewares/validate';
 
 const authRoute = Router();
 
-authRoute.route('/tokens').post(
+authRoute.route('/').post(
   validate([
     check('username')
       .not()
@@ -15,7 +15,7 @@ authRoute.route('/tokens').post(
       .not()
       .isEmpty()
   ]),
-  wrapAsync(authController.tokens)
+  wrapAsync(authController.auth)
 );
 
 export { authRoute };

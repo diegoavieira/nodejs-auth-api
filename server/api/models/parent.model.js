@@ -9,14 +9,35 @@ const parentModel = database.define('PARENT', {
   },
   name: {
     type: DataTypes.STRING,
+    unique: true,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  theme_name: {
+  theme: {
     type: DataTypes.STRING,
-    unique: true,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  auth_url: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  client_id: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  realm: {
+    type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true

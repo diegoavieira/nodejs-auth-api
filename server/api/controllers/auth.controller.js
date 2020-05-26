@@ -4,7 +4,7 @@ import { env } from '../../config/environment';
 
 const authController = {};
 
-authController.tokens = async (req, res) => {
+authController.auth = async (req, res) => {
   try {
     const { username, password } = req.body;
 
