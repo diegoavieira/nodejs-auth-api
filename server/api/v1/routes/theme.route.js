@@ -1,15 +1,15 @@
 import { Router } from 'express';
 import wrapAsync from './middlewares/wrap-async';
 import { themeController } from '../controllers';
-import keycloak from '../../config/keycloak';
 import validate from './middlewares/validate';
 import { check } from 'express-validator';
+import jwtCheck from './middlewares/jwt-check';
 
 const themeRoute = Router();
 
 themeRoute
   .route('/')
-  .all(keycloak.protect())
+  .all(jwtCheck())
   .post(
     validate([
       check('name')
@@ -28,7 +28,7 @@ themeRoute
 
 themeRoute
   .route('/:id')
-  .all(keycloak.protect())
+  .all(jwtCheck())
   .get(wrapAsync(themeController.getById))
   .put(wrapAsync(themeController.update))
   .delete(wrapAsync(themeController.delete));

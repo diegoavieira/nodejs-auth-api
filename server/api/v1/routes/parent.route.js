@@ -3,13 +3,13 @@ import wrapAsync from './middlewares/wrap-async';
 import { parentController } from '../controllers';
 import validate from './middlewares/validate';
 import { check } from 'express-validator';
-import keycloak from '../../config/keycloak';
+import jwtCheck from './middlewares/jwt-check';
 
 const parentRoute = Router();
 
 parentRoute
   .route('/')
-  .all(keycloak.protect())
+  .all(jwtCheck())
   .post(
     validate([
       check('name')
@@ -34,7 +34,7 @@ parentRoute
 
 parentRoute
   .route('/:id')
-  .all(keycloak.protect())
+  .all(jwtCheck())
   .get(wrapAsync(parentController.getById))
   .put(wrapAsync(parentController.update))
   .delete(wrapAsync(parentController.delete));

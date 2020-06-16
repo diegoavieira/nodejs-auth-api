@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'querystring';
-import { env } from '../../config/environment';
+import { env } from '../../../config/environment';
 
 const authController = {};
 
@@ -8,12 +8,13 @@ authController.auth = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const url = `${env.auth_url}/realms/${env.realm}/protocol/openid-connect/token`;
+    const url = `${env.domain}/oauth/token`;
 
     const params = {
-      client_id: env.client_id,
       username,
       password,
+      client_id: env.client_id,
+      audience: env.audience,
       grant_type: 'password'
     };
 

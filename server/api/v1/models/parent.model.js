@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import database from '../../config/database';
+import database from '../../../config/database';
 
-const themeModel = database.define('THEME', {
+const parentModel = database.define('PARENT', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -9,38 +9,40 @@ const themeModel = database.define('THEME', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
     unique: true,
+    allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  primary: {
+  theme: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  accent: {
+  auth_url: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
     }
   },
-  warn: {
+  client_id: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
-  text: {
+  realm: {
     type: DataTypes.STRING,
-    allowNull: true
-  },
-  background: {
-    type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 });
 
-export { themeModel };
+export { parentModel };

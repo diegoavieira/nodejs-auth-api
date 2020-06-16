@@ -5,8 +5,8 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 const env = {
   port: process.env.PORT,
   database_uri: process.env.DATABASE_URI,
-  auth_url: process.env.AUTH_URL,
-  realm: process.env.REALM,
+  domain: process.env.DOMAIN,
+  audience: process.env.AUDIENCE,
   client_id: process.env.CLIENT_ID
 };
 
