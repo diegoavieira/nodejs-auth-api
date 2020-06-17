@@ -1,6 +1,6 @@
 import expressJwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import { env } from '../../../../config/environment';
+import { env } from '../config/environment';
 
 const jwtCheck = () => {
   return expressJwt({

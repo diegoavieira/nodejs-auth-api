@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'querystring';
-import { env } from '../../../config/environment';
+import { env } from '../../config/environment';
 
 const authController = {};
 

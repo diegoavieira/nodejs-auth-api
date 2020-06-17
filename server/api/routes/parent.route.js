@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import wrapAsync from './middlewares/wrap-async';
+import wrapAsync from '../../middlewares/wrap-async';
 import { parentController } from '../controllers';
-import validate from './middlewares/validate';
+import validate from '../../middlewares/validate';
 import { check } from 'express-validator';
-import jwtCheck from './middlewares/jwt-check';
+import jwtCheck from '../../middlewares/jwt-check';
 
 const parentRoute = Router();
 

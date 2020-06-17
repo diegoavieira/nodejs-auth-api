@@ -4,7 +4,7 @@ import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import logger from './logger';
-import apiV1 from '../api/v1';
+import api from '../api';
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/v1', apiV1);
+app.use('/v1', api);
 
 app.use('*', (req, res) => {
   res.status(404).json({ error: `Route ${req.originalUrl} does not exists` });
