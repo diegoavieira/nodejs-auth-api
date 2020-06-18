@@ -1,6 +1,6 @@
 import expressJwt from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import { env } from '../../config';
+import config from '../../config';
 
 const jwtCheck = () => {
   return expressJwt({
@@ -8,10 +8,10 @@ const jwtCheck = () => {
       cache: true,
       rateLimit: true,
       jwksRequestsPerMinute: 5,
-      jwksUri: `${env.domain}/.well-known/jwks.json`
+      jwksUri: `${config.env.domain}/.well-known/jwks.json`
     }),
-    audience: env.audience,
-    issuer: `${env.domain}/`,
+    audience: config.env.audience,
+    issuer: `${config.env.domain}/`,
     algorithms: ['RS256']
   });
 };

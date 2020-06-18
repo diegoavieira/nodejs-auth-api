@@ -1,11 +1,11 @@
 import { format, createLogger, transports } from 'winston';
-import { isDev } from '../config';
+import config from '../config';
 
 const logger = createLogger({
   format: format.combine(format.colorize(), format.timestamp()),
   transports: [
     new transports.Console({
-      level: isDev ? 'debug' : 'info',
+      level: config.isDev ? 'debug' : 'info',
       format: format.printf(info => {
         if (typeof info.message === 'string') {
           return `[${info.level}] ${info.message}`;
@@ -33,4 +33,4 @@ logger.stream = {
   write: info => logger.debug(info)
 };
 
-export default logger;
+export { logger };
