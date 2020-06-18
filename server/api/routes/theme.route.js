@@ -1,9 +1,7 @@
 import { Router } from 'express';
-import wrapAsync from '../../middlewares/wrap-async';
-import { themeController } from '../controllers';
-import validate from '../../middlewares/validate';
 import { check } from 'express-validator';
-import jwtCheck from '../../middlewares/jwt-check';
+import { themeController } from '../controllers';
+import { validate, jwtCheck, wrapAsync } from '../middlewares';
 
 const themeRoute = Router();
 

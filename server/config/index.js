@@ -1,6 +1,11 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
 
+const dotenvConfig = dotenv.config();
 const nodeEnv = process.env.NODE_ENV || 'development';
+
+if (dotenvConfig.error) {
+  throw new Error(`Couldn't find .env file`);
+}
 
 const env = {
   port: process.env.PORT,

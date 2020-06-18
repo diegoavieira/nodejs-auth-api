@@ -1,4 +1,4 @@
-import { themeModel } from '../models';
+import { themeModel } from '../../models';
 
 const themeController = {};
 

@@ -1,5 +1,5 @@
 import { format, createLogger, transports } from 'winston';
-import { isDev } from '../config/environment';
+import { isDev } from '../config';
 
 const logger = createLogger({
   format: format.combine(format.colorize(), format.timestamp()),

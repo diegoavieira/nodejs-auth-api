@@ -16,4 +16,4 @@ const validate = validations => {
   };
 };
 
-export default validate;
+export { validate };

@@ -1,4 +1,4 @@
-import { userModel } from '../models';
+import { userModel } from '../../models';
 
 const userController = {};
 

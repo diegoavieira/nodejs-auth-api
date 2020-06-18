@@ -1,4 +1,4 @@
-import { parentModel } from '../models';
+import { parentModel } from '../../models';
 
 const parentController = {};
 

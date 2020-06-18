@@ -1,7 +1,6 @@
 import { Router } from 'express';
-import wrapAsync from '../../middlewares/wrap-async';
 import { userController } from '../controllers';
-import jwtCheck from '../../middlewares/jwt-check';
+import { jwtCheck, wrapAsync } from '../middlewares';
 
 const userRoute = Router();
 

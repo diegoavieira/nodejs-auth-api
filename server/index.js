@@ -1,7 +1,7 @@
-import database from './config/database';
-import app from './config/app';
-import logger from './config/logger';
-import { env } from './config/environment';
+import database from './database';
+import app from './app';
+import logger from './utils/logger';
+import { env } from './config';
 
 database
   .sync({ force: false })

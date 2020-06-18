@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
-import { env, isDev } from './environment';
-import logger from './logger';
+import { env, isDev } from '../config';
+import logger from '../utils/logger';
 
 const database = new Sequelize(env.database_uri, {
   dialect: 'postgres',
