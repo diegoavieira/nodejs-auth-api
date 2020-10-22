@@ -1,10 +1,10 @@
 import { Sequelize } from 'sequelize';
-import { env, isDev } from './environment';
-import logger from './logger';
+import config from '../config';
+import { logger } from '../utils';
 
-const database = new Sequelize(env.database_url, {
+const database = new Sequelize(config.env.database_uri, {
   dialect: 'postgres',
-  logging: isDev ? logger.stream.write : false,
+  logging: config.isDev ? logger.stream.write : false,
   define: {
     freezeTableName: true,
     underscored: true,

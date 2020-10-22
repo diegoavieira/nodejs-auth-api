@@ -1,14 +1,12 @@
-import database from './config/database';
-import app from './config/app';
-import logger from './config/logger';
-import { env } from './config/environment';
+import database from './database';
+import app from './app';
+import { logger } from './utils';
+import config from './config';
 
 database
   .sync({ force: false })
   .then(() => {
     logger.info('Models synchronized');
-    app.listen(env.port, () =>
-      logger.info(`Server running at port ${env.port}`)
-    );
+    app.listen(config.env.port, () => logger.info(`Server running at port ${config.env.port}`));
   })
   .catch(error => logger.error(error.message));

@@ -1,4 +1,4 @@
-import { parentModel } from '../models';
+import { parentModel } from '../../models';
 
 const parentController = {};
 
@@ -24,6 +24,21 @@ parentController.getById = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await parentModel.findOne({ where: { id } });
+
+    if (data) {
+      return res.status(200).json({ data });
+    }
+
+    return res.status(404).json({ data: null });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+parentController.getByName = async (req, res) => {
+  try {
+    const { name } = req.params;
+    const data = await parentModel.findOne({ where: { name } });
 
     if (data) {
       return res.status(200).json({ data });

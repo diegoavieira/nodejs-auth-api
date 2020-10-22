@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import database from '../../config/database';
+import database from '../database';
 
 const themeModel = database.define('THEME', {
   id: {

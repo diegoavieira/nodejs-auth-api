@@ -1,19 +1,18 @@
 import { Router } from 'express';
-import wrapAsync from '../../middleware/wrap-async';
 import { userController } from '../controllers';
-import verifyAuth from '../../middleware/verify-auth';
+import { jwtCheck, wrapAsync } from '../middlewares';
 
 const userRoute = Router();
 
 userRoute
   .route('/')
-  .all(verifyAuth)
+  .all(jwtCheck())
   .post(wrapAsync(userController.create))
   .get(wrapAsync(userController.getAll));
 
 userRoute
   .route('/:id')
-  .all(verifyAuth)
+  .all(jwtCheck())
   .get(wrapAsync(userController.getById))
   .put(wrapAsync(userController.update))
   .delete(wrapAsync(userController.delete));

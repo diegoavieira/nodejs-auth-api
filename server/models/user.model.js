@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import bcrypt from 'bcrypt';
-import database from '../../config/database';
+import database from '../database';
 
 const userModel = database.define('USER', {
   id: {
